@@ -1,0 +1,11 @@
+name: wdn-shiny-app
+title:
+username:
+account: cloudwater
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6908674
+bundleId: 6263565
+url: https://cloudwater.shinyapps.io/wdn-shiny-app/
+when: 1662139659.26995
+lastSyncTime: 1662139659.26996
