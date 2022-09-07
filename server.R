@@ -56,11 +56,11 @@ shinyServer(function(input, output) {
   })
 
   mapData <- reactive({req(nodeData())
-    
+
     # Create the map
     bbox <- c(left = min(nodeData()$lon)-0.20, right = max(nodeData()$lon)+0.20,
               bottom = min(nodeData()$lat)-0.20, top = max(nodeData()$lat)+0.20)
-    
+
     get_stamenmap(bbox = bbox,
       maptype = "toner-lite", color = "bw", crop = TRUE, force = TRUE)
   })
@@ -98,7 +98,7 @@ shinyServer(function(input, output) {
         pipes.data = pipes_scn,
         global.output = TRUE)
   })
-  
+
   plotWDN <- reactive({
 
       req(out_reactive())
@@ -118,12 +118,10 @@ shinyServer(function(input, output) {
   # Test that the Python functions have been imported
   output$message <- DT::renderDataTable({out_reactive()$summary})
   output$nodeTable <- DT::renderDataTable({
-    DT::datatable(nodeData(), options = list(pageLength = 10)) #%>%
-     # formatRound(columns=1:ncol(nodeData()))
+    DT::datatable(nodeData(), options = list(pageLength = 10)) 
   })
   output$linkTable <- DT::renderDataTable({
-      DT::datatable(pipeData(), options = list(pageLength = 10)) %>%
-      formatRound(columns=1:ncol(pipeData()), digits=1)
+      DT::datatable(pipeData(), options = list(pageLength = 10)) 
   })
 
   # ~~ INTERACTIVE INPUT VARIABLES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,7 +146,9 @@ shinyServer(function(input, output) {
       
       node_names <- nodeData()$label
       connection_lst <- pipeData()$id
-      names(connection_lst) <- paste(node_names[pipeData()$start], node_names[pipeData()$end], sep ="_")
+      pipe_start_index <- match(pipeData()$start, nodeData()$id)
+      pipe_end_index <- match(pipeData()$end, nodeData()$id)
+      names(connection_lst) <- paste(node_names[pipe_start_index], node_names[pipe_end_index], sep ="_")
     
       pickerInput(
           inputId = "linkFailure",

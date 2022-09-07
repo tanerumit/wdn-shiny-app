@@ -6,8 +6,8 @@ library(shinyWidgets)
 
 # Begin UI for the R + reticulate example app
 ui <- fluidPage(
-  titlePanel("Friesland Water Distribution Network Analysis"),
-  helpText("Simulation exercise to assess system resilience to water shortages"),
+  titlePanel("Water Distribution Network Analysis (alpha)"),
+  helpText("Simulation exercise to assess a water distribution network system resilience to water shortages (in progress)"),
   br(),
   # ---------------- Sidebar panel with changeable inputs ----------------- #
   sidebarPanel(
@@ -40,14 +40,14 @@ ui <- fluidPage(
         tabPanel("Results plot",
           helpText("This visual shows the distribution of simulated water shortages accross the system"),
           br(),
-          plotOutput("plotWDNUI", height = "800px", width = "900px") %>% 
-          withSpinner()
+          plotOutput("plotWDNUI", height = "800px", width = "900px") %>% withSpinner()
         ),
         tabPanel("Results table",
           helpText("This table displays calculated metrics from the simulation"),
           br(),
           DT::dataTableOutput('message')
-        )
+        ),
+        
       )
   ) #mainpanel close
 )
